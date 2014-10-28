@@ -125,7 +125,8 @@ block.fn.tweets = function(config) {
         // add marker to map
         new google.maps.Marker({
             position: new google.maps.LatLng(tweet.coordinates.lat, tweet.coordinates.lng),
-            map: map
+            map: map,
+			title: tweet.text
         });
     });
 
