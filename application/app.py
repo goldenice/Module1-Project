@@ -18,14 +18,17 @@ def add_request_handlers(httpd):
 @event('init')
 def setup(ctx, e):
     # start the offline tweet stream
-    start_offline_tweets('data/bata_2014_w_loc.txt', 'chirp', time_factor=100000)
+    start_offline_tweets('data/bata_2014_w_loc.txt', 'chirp', time_factor=1000000)
     ctx.words = {}
+    temp_file = open("data/words.txt", "r")
+    ctx.filter_words = temp_file.readlines()
+    temp_file.close()
 
 # simple word splitter
 pattern = re.compile('\W+')
 
 # sample stopword list, needs to be much more sophisticated
-stopwords = ['het', 'een', 'aan', 'zijn', 'http', 'www', 'com', 'ben', 'jij']
+stopwords = []
 
 
 def words(message):
@@ -40,10 +43,14 @@ def words(message):
 def tweet(ctx, e):
     # we receive a tweet
     tweet = e.data
-
-    coordinates = tweet['coordinates'].split(", ")
-    tweet['coordinates'] = {}
-
-    tweet['coordinates']['lat'] = coordinates[0]
-    tweet['coordinates']['lng'] = coordinates[1]
-    emit('tweets', tweet)
+    relevant = False
+    for word in ctx.filter_words:
+        if word in tweet["text"] or word in tweet["entities"]["hashtags"]:
+            relevant = True
+            break
+    if relevant:
+        coordinates = tweet['coordinates'].split(", ")
+        tweet['coordinates'] = {}
+        tweet['coordinates']['lat'] = coordinates[0]
+        tweet['coordinates']['lng'] = coordinates[1]
+        emit('tweets', tweet)
