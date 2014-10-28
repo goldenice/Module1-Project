@@ -18,7 +18,7 @@ def add_request_handlers(httpd):
 @event('init')
 def setup(ctx, e):
     # start the offline tweet stream
-    start_offline_tweets('data/bata_2014.txt', 'chirp', time_factor=100000)
+    start_offline_tweets('data/bata_2014_w_loc.txt', 'chirp', time_factor=100000)
     ctx.words = {}
 
 # simple word splitter
@@ -41,10 +41,9 @@ def tweet(ctx, e):
     # we receive a tweet
     tweet = e.data
 
-    emit('tweets', tweet)
+    coordinates = tweet['coordinates'].split(", ")
+    tweet['coordinates'] = {}
 
-    for w in words(tweet['text']):
-        emit('word', {
-            'action': 'add',
-            'value': (w, 1)
-        })
+    tweet['coordinates']['lat'] = coordinates[0]
+    tweet['coordinates']['lng'] = coordinates[1]
+    emit('tweets', tweet)
