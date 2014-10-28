@@ -4,23 +4,37 @@
 		<title>Twitter ECA Dashboard</title>
 
 		<link rel="stylesheet" href="/style/layout.css"/>
-        	<link rel="stylesheet" href="/style/theme.css"/>
-        	<link rel="stylesheet" href="/style/wordcloud.css"/>
-        	<script src="/lib/jquery-2.1.1.min.js"></script>
-        	<script src="/lib/jquery.flot.min.js"></script>
-        	<script src="/lib/jquery.flot.categories.min.js"></script>
-        	<script src="/lib/jquery.flot.pie.js"></script>
-        	<script src="/lib/core.js"></script>
-        	<script src="/lib/charts.js"></script>
-        	<script src="/lib/jqcloud-1.0.4.js"></script>
-        	<script src="/lib/wordcloud.js"></script>
-        	<script src="/lib/tweets.js"></script>
+        <link rel="stylesheet" href="/style/theme.css"/>
+        <script src="/lib/jquery-2.1.1.min.js"></script>
+        <script src="/lib/jquery.flot.min.js"></script>
+        <script src="/lib/jquery.flot.categories.min.js"></script>
+        <script src="/lib/jquery.flot.pie.js"></script>
+        <script src="/lib/core.js"></script>
+        <script src="/lib/charts.js"></script>
+        <script src="/lib/tweets.js"></script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCobscsJqSdqdjA3QJ4P7wOkGxlWov_ugI"></script>
+        <script type="text/javascript">
+            var map;
+            function initialize() {
+                var mapOptions = {
+                    zoom: 9,
+                    center: new google.maps.LatLng(52.0195, 6.4668)
+                };
+                map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            }
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+
 	</head>
 
 	<body class="container_12">
 
-		<h1>Testing wordcloud</h1>
-		<div id="tweets" class="grid_6 vert_4"></div>
+		<h1>Testing tweetfeed and map</h1>
+		<div id="tweets" class="grid_6"></div>
+
+        <div id="map-canvas" class="grid_6" style="height: 620px">
+        </div>
 
         <script>
         block('#tweets').tweets();

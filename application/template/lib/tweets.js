@@ -64,7 +64,7 @@ var process_entities = function(message, entities) {
     result += message.substring(marker, message.length);
 
     return result;
-}
+};
 
 block.fn.tweets = function(config) {
     var options = $.extend({
@@ -121,6 +121,12 @@ block.fn.tweets = function(config) {
         if ($list.children().size() > options.memory) {
             $list.children().last().remove();
         }
+
+        // add marker to map
+        new google.maps.Marker({
+            position: new google.maps.LatLng(tweet.coordinates.lat, tweet.coordinates.lng),
+            map: map
+        });
     });
 
     return this.$element;
