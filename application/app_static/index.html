@@ -13,7 +13,7 @@
 		<script src="/lib/jqcloud-1.0.4.js"></script>
 		<script src="/lib/core.js"></script>
 		<script src="/lib/charts.js"></script>
-		<script src="/lib/application.js"></script>
+		<script src="/lib/wordcloud.js"></script>
 	</head>
 	
 	<body>
@@ -27,5 +27,9 @@
 				</div>
 			</div>
 		</div>
+
+		<script>
+		events.connect('word', '#tweetstream');
+		</script>
 	</body>
 </html>
