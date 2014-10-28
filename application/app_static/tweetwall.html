@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Twitter ECA Dashboard</title>
+
+		<link rel="stylesheet" href="/style/layout.css"/>
+        	<link rel="stylesheet" href="/style/theme.css"/>
+        	<link rel="stylesheet" href="/style/wordcloud.css"/>
+        	<script src="/lib/jquery-2.1.1.min.js"></script>
+        	<script src="/lib/jquery.flot.min.js"></script>
+        	<script src="/lib/jquery.flot.categories.min.js"></script>
+        	<script src="/lib/jquery.flot.pie.js"></script>
+        	<script src="/lib/core.js"></script>
+        	<script src="/lib/charts.js"></script>
+        	<script src="/lib/jqcloud-1.0.4.js"></script>
+        	<script src="/lib/wordcloud.js"></script>
+        	<script src="/lib/tweets.js"></script>
+	</head>
+
+	<body class="container_12">
+
+		<h1>Testing wordcloud</h1>
+		<div id="tweets" class="grid_6 vert_4"></div>
+
+        <script>
+        block('#tweets').tweets();
+        events.connect('tweets', '#tweets');
+		</script>
+	</body>
+</html>

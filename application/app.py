@@ -41,7 +41,7 @@ def tweet(ctx, e):
     # we receive a tweet
     tweet = e.data
 
-    print("Tweet received")
+    emit('tweets', tweet)
 
     for w in words(tweet['text']):
         emit('word', {
