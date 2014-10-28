@@ -6,7 +6,7 @@ gevecht
 fight
 ongeluk
 accident
-drug
+drugs
 drug
 wapen
 weapon

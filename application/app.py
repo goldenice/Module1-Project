@@ -38,6 +38,11 @@ def words(message):
     result = filter(lambda w: len(w) > 2, result)
     return result
 
+def combine(l):
+    s = ""
+    for e in l:
+        s+=e['text']
+    return s
 
 @event('chirp')
 def tweet(ctx, e):
@@ -45,7 +50,7 @@ def tweet(ctx, e):
     tweet = e.data
     relevant = False
     for word in ctx.filter_words:
-        if word in tweet["text"] or word in tweet["entities"]["hashtags"]:
+        if word.replace("\n", "") in tweet["text"].lower() or word.replace("\n", "") in combine(tweet["entities"]["hashtags"]).lower():
             relevant = True
             break
     if relevant:
