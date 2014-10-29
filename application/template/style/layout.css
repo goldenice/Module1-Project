@@ -41,6 +41,11 @@
 
 /* Layout details */
 
+#extra-padding {
+    padding: 0 20px;
+    overflow: auto;
+}
+
 p:first-child {
     margin-top: 0;
 }
