@@ -68,7 +68,7 @@ var process_entities = function(message, entities) {
 
 block.fn.tweets = function(config) {
     var options = $.extend({
-        memory: 8
+        memory: 64
     }, config);
 
     // create the necessary HTML in the block container
