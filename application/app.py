@@ -44,15 +44,25 @@ def combine(l):
         s+=e['text']
     return s
 
+def check_relevance(ctx, tweet, min_score):
+        score = 0
+        for word in ctx.filter_words:
+            if word.replace("\n", "") in tweet["text"].lower():
+                if " %s "%(word.replace("\n", "")) in tweet["text"].lower():
+                    score += 2
+                else:
+                    score += 1
+        if score >= min_score:
+            relevant = True
+        else:
+            relevant = False
+        return relevant
+
 @event('chirp')
 def tweet(ctx, e):
     # we receive a tweet
     tweet = e.data
-    relevant = False
-    for word in ctx.filter_words:
-        if word.replace("\n", "") in tweet["text"].lower() or word.replace("\n", "") in combine(tweet["entities"]["hashtags"]).lower():
-            relevant = True
-            break
+    relevant = check_relevance(ctx, tweet, 2)
     if relevant:
         coordinates = tweet['coordinates'].split(", ")
         tweet['coordinates'] = {}
