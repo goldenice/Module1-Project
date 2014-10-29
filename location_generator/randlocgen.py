@@ -47,10 +47,15 @@ def read_and_process_file(filename):
     bata = open(filename, "r", encoding='utf-8')
     batanew = ""
     data = bata.readlines()
+    length = len(data)
+    i = 0
     for t in data:
+        if round((i/length)*100,1)%5 == 0:
+            print(filename, (i/length)*100)
         p = random_location(random_point())
         t = t.replace('"coordinates":null', '"coordinates": {"coordinates" : ['+str(p["lng"])+", "+str(p["lat"])+']}')
         batanew += (t)
+        i+=1
     bata.close()
     return batanew
 
@@ -86,7 +91,7 @@ add_line(52.162609, 6.429909, 52.157278, 6.609974, 0.001)
 add_line(52.157278, 6.609974, 52.174501, 6.734290, 0.001)
 add_line(52.174501, 6.734290, 52.244135, 6.850530, 0.001)
 
-filenames = ["bata_2014.txt", "batatweets.txt", "sr11.txt"]
+filenames = ["bata_2014.txt", "batatweets.txt", "p2000.txt"]
 
 """for i in range(199):
     p = random_location(random_point())
@@ -95,6 +100,7 @@ filenames = ["bata_2014.txt", "batatweets.txt", "sr11.txt"]
 """
 new_file = ""
 for filename in filenames:
+    print("processing: ", filename)
     new_file += read_and_process_file(filename)
 
 
