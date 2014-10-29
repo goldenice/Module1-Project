@@ -18,7 +18,6 @@ broken
 gekneusd
 bruisend
 bruises
-gevallen
 fallen
 onwel
 ongeluk
@@ -28,6 +27,6 @@ wond
 aanrijding
 valpartij
 vallen
-carcrash
+crash
 hulp
 overgeven
