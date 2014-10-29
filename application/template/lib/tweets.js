@@ -126,6 +126,7 @@ block.fn.tweets = function(config) {
         new google.maps.Marker({
             position: new google.maps.LatLng(tweet.coordinates.lat, tweet.coordinates.lng),
             map: map,
+            animation: google.maps.Animation.DROP,
 			title: tweet.text
         });
     });
