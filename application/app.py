@@ -18,7 +18,7 @@ def add_request_handlers(httpd):
 @event('init')
 def setup(ctx, e):
     # start the offline tweet stream
-    start_offline_tweets('data/bata_2014_w_loc.txt', 'chirp', time_factor=1000000)
+    start_offline_tweets('data/data.txt', 'chirp', time_factor=1000000)
     ctx.words = {}
     temp_file = open("data/words.txt", "r")
     ctx.filter_words = temp_file.readlines()
@@ -49,7 +49,7 @@ def check_relevance(ctx, tweet, min_score):
         for word in ctx.filter_words:
             if word.replace("\n", "") in tweet["text"].lower():
                 if " %s "%(word.replace("\n", "")) in tweet["text"].lower():
-                    score += 2
+                    score += 3
                 else:
                     score += 1
         if score >= min_score:
@@ -62,10 +62,10 @@ def check_relevance(ctx, tweet, min_score):
 def tweet(ctx, e):
     # we receive a tweet
     tweet = e.data
-    relevant = check_relevance(ctx, tweet, 2)
+    relevant = check_relevance(ctx, tweet, 3)
     if relevant:
-        coordinates = tweet['coordinates'].split(", ")
+        coordinates = tweet['coordinates']['coordinates']
         tweet['coordinates'] = {}
-        tweet['coordinates']['lat'] = coordinates[0]
-        tweet['coordinates']['lng'] = coordinates[1]
+        tweet['coordinates']['lat'] = coordinates[1]
+        tweet['coordinates']['lng'] = coordinates[0]
         emit('tweets', tweet)
