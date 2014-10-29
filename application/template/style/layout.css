@@ -112,3 +112,9 @@ body {
     color: white;
     line-height: 80px;
 }
+
+#logo_utwente {
+    height: 50px;
+    width: 100px;
+    padding-top: 10px;
+}
