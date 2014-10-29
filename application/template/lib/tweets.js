@@ -1,3 +1,6 @@
+// Variable to keep track of last opened infowindow on Google Maps
+var lastinfowindow = null;
+
 (function($, block) {
 
 // Entity formatters for use by tweet list
@@ -123,10 +126,23 @@ block.fn.tweets = function(config) {
         }
 
         // add marker to map
-        new google.maps.Marker({
+        var marker = new google.maps.Marker({
             position: new google.maps.LatLng(tweet.coordinates.lat, tweet.coordinates.lng),
             map: map,
+            animation: google.maps.Animation.DROP,
 			title: tweet.text
+        });
+        
+        var infowindow = new google.maps.InfoWindow({
+            content: "<span>" + tweet.text + "</span>"
+        });
+        
+        google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map,marker);
+            if (lastinfowindow != null) {
+                lastinfowindow.close();
+            }
+            lastinfowindow = infowindow;
         });
     });
 

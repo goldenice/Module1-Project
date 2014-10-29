@@ -18,7 +18,7 @@ def add_request_handlers(httpd):
 @event('init')
 def setup(ctx, e):
     # start the offline tweet stream
-    start_offline_tweets('data/bata_2014_w_loc.txt', 'chirp', time_factor=1000000)
+    start_offline_tweets('data/data.txt', 'chirp', time_factor=1000000)
     ctx.words = {}
     temp_file = open("data/words.txt", "r")
     ctx.filter_words = temp_file.readlines()
@@ -44,18 +44,28 @@ def combine(l):
         s+=e['text']
     return s
 
+def check_relevance(ctx, tweet, min_score):
+        score = 0
+        for word in ctx.filter_words:
+            if word.replace("\n", "") in tweet["text"].lower():
+                if " %s "%(word.replace("\n", "")) in tweet["text"].lower():
+                    score += 3
+                else:
+                    score += 1
+        if score >= min_score:
+            relevant = True
+        else:
+            relevant = False
+        return relevant
+
 @event('chirp')
 def tweet(ctx, e):
     # we receive a tweet
     tweet = e.data
-    relevant = False
-    for word in ctx.filter_words:
-        if word.replace("\n", "") in tweet["text"].lower() or word.replace("\n", "") in combine(tweet["entities"]["hashtags"]).lower():
-            relevant = True
-            break
+    relevant = check_relevance(ctx, tweet, 3)
     if relevant:
-        coordinates = tweet['coordinates'].split(", ")
+        coordinates = tweet['coordinates']['coordinates']
         tweet['coordinates'] = {}
-        tweet['coordinates']['lat'] = coordinates[0]
-        tweet['coordinates']['lng'] = coordinates[1]
+        tweet['coordinates']['lat'] = coordinates[1]
+        tweet['coordinates']['lng'] = coordinates[0]
         emit('tweets', tweet)

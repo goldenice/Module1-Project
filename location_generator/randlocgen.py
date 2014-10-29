@@ -43,6 +43,22 @@ def random_location(point):
     lng += random.random()*rad*math.sin(angle)
     return {"lat": lat, "lng": lng}
 
+def read_and_process_file(filename):
+    bata = open(filename, "r", encoding='utf-8')
+    batanew = ""
+    data = bata.readlines()
+    length = len(data)
+    i = 0
+    for t in data:
+        if round((i/length)*100,1)%5 == 0:
+            print(filename, (i/length)*100)
+        p = random_location(random_point())
+        t = t.replace('"coordinates":null', '"coordinates": {"coordinates" : ['+str(p["lng"])+", "+str(p["lat"])+']}')
+        batanew += (t)
+        i+=1
+    bata.close()
+    return batanew
+
 #Nijmegen
 add_point(51.817423, 5.869934, 0.02, 10)
 #Ulft
@@ -75,23 +91,19 @@ add_line(52.162609, 6.429909, 52.157278, 6.609974, 0.001)
 add_line(52.157278, 6.609974, 52.174501, 6.734290, 0.001)
 add_line(52.174501, 6.734290, 52.244135, 6.850530, 0.001)
 
-
+filenames = ["bata_2014.txt", "batatweets.txt", "p2000.txt"]
 
 """for i in range(199):
     p = random_location(random_point())
     print ("%s \t %s"%(p["lat"], p["lng"]))
 
 """
-bata = open("bata_2014.txt", "r", encoding='utf-8')
-batanew = ""
-points_orig = points[:]
-data = bata.readlines()
-total_length = len(data)
+new_file = ""
+for filename in filenames:
+    print("processing: ", filename)
+    new_file += read_and_process_file(filename)
 
-for t in data:
-    p = random_location(random_point())
-    batanew += (t.replace('"coordinates":null', '"coordinates": "'+str(p["lat"])+", "+str(p["lng"])+'"'))
-bata.close()
-batan = open("bata_2014_w_loc.txt", "w", encoding='utf-8')
-batan.write(batanew)
+
+batan = open("data.txt", "w", encoding='utf-8')
+batan.write(new_file)
 batan.close()
