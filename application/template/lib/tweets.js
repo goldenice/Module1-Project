@@ -85,7 +85,8 @@ block.fn.tweets = function(config) {
     this.actions(function(e, tweet){
         var $item = $('<li class="stream-item"></li>');
 
-        var $tweet = $('<div class="tweet"></div>');
+        var $tweet = $('<div class="tweet" onclick="tweetClick(this)"></div>');
+		var $location = $('<div class="location" style="display: none">' + tweet.coordinates.lat + ', ' + tweet.coordinates.lng + '</div>');
         var $content = $('<div class="content"></div>');
         var $header = $('<div class="stream-item-header"></div>');
 
@@ -115,6 +116,7 @@ block.fn.tweets = function(config) {
 
         // Build outer structure of containing divs:
         $tweet.append($content);
+		$tweet.append($location);
         $item.append($tweet);
         
         // place new tweet in front of list 
