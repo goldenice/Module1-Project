@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Twitter ECA Dashboard</title>
+
+        <link rel="stylesheet" href="/style/layout.css"/>
+        <link rel="stylesheet" href="/style/theme.css"/>
+        <link rel="stylesheet" href="/style/wordcloud.css"/>
+        <script src="/lib/jquery-2.1.1.min.js"></script>
+        <script src="/lib/jquery.flot.min.js"></script>
+        <script src="/lib/jquery.flot.categories.min.js"></script>
+        <script src="/lib/jquery.flot.pie.js"></script>
+        <script src="/lib/core.js"></script>
+        <script src="/lib/charts.js"></script>
+        <script src="/lib/jqcloud-1.0.4.js"></script>
+        <script src="/lib/wordcloud.js"></script>
+        <script src="/lib/tweets.js"></script>
+		<script src="/lib/application.js"></script>
+	</head>
+    <body>       
+    <div id="header">
+        <p id="header_text"> Twitterfeed voor ongevalmanagement </p>
+        <div class="logos">   
+            <a href="http://www.politie.nl/" target="_blank"><img id="logo_politie" src="http://i.imgur.com/5PvVys4.png"> </a>
+            <a href="http://www.brandweer.nl/" target="_blank"><img id="logo_brandweer"src="http://i.imgur.com/zAiShIH.png"> </a>
+            <a href="https://www.inter-actief.utwente.nl/site_media/data/image/middel/2014/10/03/Onderwijsbarbecue-2014_10.jpg" target="_blank"><img id="logo_ehbo" src="http://i.imgur.com/37I6i7a.png"></a>
+            <a href="http://www.utwente.nl/" target="_blank"><img id="logo_utwente" src="http://i.imgur.com/IVViKaV.png"> </a>
+        </div>
+    </div>
+	<div class="container_12">
+	
+         <div id="wolk" class="grid_12 vert_4"></div>
+    
+		<script>
+			block('#wolk').wordcloud({
+				filter_function: function(cat, val, max) {
+				return val >= 1; // do not display words seen less than 3 times
+				}
+			});
+		events.connect('word', '#wolk');
+		</script>
+	</div>
+    </body>
+</html>
