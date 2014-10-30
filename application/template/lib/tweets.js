@@ -131,6 +131,8 @@ block.fn.tweets = function(config) {
             map: map,
             animation: google.maps.Animation.DROP,
 			title: tweet.text
+            // bombardement van gerben
+            // icon: 'http://puu.sh/cw4fJ/8cc630ad98.png'
         });
         
         var infowindow = new google.maps.InfoWindow({
