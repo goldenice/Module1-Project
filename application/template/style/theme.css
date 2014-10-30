@@ -2,6 +2,9 @@
 body {
     font-family: sans-serif;
     background-color: #c0deed;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 p {
@@ -22,9 +25,44 @@ pre {
     border-bottom: 1px solid #ddd;
 }
 
-h1.header {
-    color: #fff;
-    font-style: italic;
+#header {
+    height: 80px;
+    background-color: #0084b4;
+    font-size: 40px;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    font-family: Arial;
+}
+
+.logos {
+    position: absolute;
+    top: 5px;
+    right: 0px;
+}
+
+.logos img {
+    height: 70px;
+    width: 70px;
+    display: inline-block;
+    float: right;
+    margin-right: 10px;
+}
+
+#logo_ehbo {
+    margin-right: 15px;
+}
+
+#header_text {
+    text-align: center;
+    color: white;
+    line-height: 80px;
+}
+
+#logo_utwente {
+    height: 50px;
+    width: 100px;
+    padding-top: 10px;
 }
 
 /* Devevlopment helpers */
