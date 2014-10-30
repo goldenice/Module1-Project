@@ -18,8 +18,8 @@
             var map;
             function initialize() {
                 var mapOptions = {
-                    zoom: 9,
-                    center: new google.maps.LatLng(52.0195, 6.4668)
+                    zoom: 8,
+                    center: new google.maps.LatLng(52.1, 5.5)
                 };
                 map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
             }
@@ -38,9 +38,9 @@
         </div>
     </div>
 	<div class="container_12">
-        <div id="tweets" class="grid_5" style="height: 860px"></div>
+        <div id="tweets" class="grid_6" style="height: 620px"></div>
 
-        <div id="map-canvas" class="grid_7" style="height: 860px"></div>
+        <div id="map-canvas" class="grid_6" style="height: 620px"></div>
 
         <script>
         block('#tweets').tweets();
