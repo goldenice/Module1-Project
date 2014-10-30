@@ -1,5 +1,6 @@
 // Variable to keep track of last opened infowindow on Google Maps
 var lastinfowindow = null;
+var markersArray = [];
 
 (function($, block) {
 
@@ -136,6 +137,7 @@ block.fn.tweets = function(config) {
             // bombardement van gerben
             // icon: 'http://puu.sh/cw4fJ/8cc630ad98.png'
         });
+        markersArray.push(marker);
         
         var infowindow = new google.maps.InfoWindow({
             content: "<span>" + tweet.text + "</span>"

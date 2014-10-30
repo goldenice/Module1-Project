@@ -24,9 +24,21 @@
                 map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
             }
             google.maps.event.addDomListener(window, 'load', initialize);
+
 			function tweetClick(tweet){
 				var loc = tweet.getElementsByClassName("location")[0].innerHTML.split(",");
-				map.setCenter(new google.maps.LatLng(parseFloat(loc[0]), parseFloat(loc[1])));
+                for (var i=0;i<markersArray.length;i++) {
+                    if (markersArray[i].getPosition().lat() == loc[0]) {
+                        console.log(markersArray[i]);
+                        infowindow = new google.maps.InfoWindow({content: "<span>" + tweet.getElementsByClassName("tweet-text")[0].innerHTML + "</span>"})
+                        infowindow.open(map, markersArray[i]);
+                        if (lastinfowindow != null) {
+                            lastinfowindow.close();
+                        }
+                        lastinfowindow = infowindow;
+                    }
+                }
+                map.setCenter(new google.maps.LatLng(parseFloat(loc[0]), parseFloat(loc[1])));
                 map.setZoom(12);
 			}
         </script>
