@@ -27,6 +27,7 @@
 			function tweetClick(tweet){
 				var loc = tweet.getElementsByClassName("location")[0].innerHTML.split(",");
 				map.setCenter(new google.maps.LatLng(parseFloat(loc[0]), parseFloat(loc[1])));
+                map.setZoom(12);
 			}
         </script>
 
